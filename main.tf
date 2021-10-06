@@ -1,7 +1,7 @@
 provider "aws" { 
-    region = "us-east-2"
-    access_key = ""
-    secret_key = ""
+    region = "REGION"
+    access_key = "ACCESS_KEY"
+    secret_key = "SECRET_ACCESS_KEY"
 }
 
 # Create VPC
@@ -40,7 +40,7 @@ resource "aws_route_table" "prod-route-table" {
 resource "aws_subnet" "subnet-1" {
     vpc_id = aws_vpc.prod-vpc.id
     cidr_block = "10.0.1.0/24"
-    availability_zone = "us-east-2a"
+    availability_zone = "AZ_WITHIN_CHOSEN_REGION"
 
     tags = {
         Name = "prod-subnet"
@@ -111,10 +111,10 @@ resource "aws_eip" "one" {
 
 # Create server 
 resource "aws_instance" "web-server-instance" {
-    ami = "ami-00399ec92321828f5"
+    ami = "AMI"
     instance_type = "t2.micro"
-    availability_zone = "us-east-2a"
-    key_name = "access"
+    availability_zone = "SAME_AZ"
+    key_name = "KEY_PAIR_NAME"
 
     network_interface {
         device_index = 0 
